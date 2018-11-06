@@ -1,8 +1,47 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdio.h>
 
 using namespace std;
+
+class csv {
+
+    string* header;
+
+    // numRows does not include header row
+    int numCols, numRows;
+    string** data;
+
+public:
+
+    csv(string path) {
+
+        // Create file reader
+        ifstream infile(path);
+
+        if (!infile.good()) {
+            // File not found
+            cout << "That file does not exist." << endl;
+            return;
+        }
+
+        string line;
+        while (getline(infile, line)) {
+            cout << line << endl;
+        }
+
+        infile.close();
+
+    }
+
+private: 
+
+    string* split(string line) {
+        return NULL;
+    }
+
+};
 
 int main(int argc, char** argv) {
 
@@ -16,33 +55,7 @@ int main(int argc, char** argv) {
         cout << "Please enter filename after executable." << endl;
         return 0;
     }
-    
-    
 
-    ofstream outfile;
-    outfile.open (outfilePath);
+    csv CSV(infilePath);
 
 }
-
-class csv {
-
-    string* header;
-
-    // numRows does not include header row
-    int numCols, numRows;
-    string** data;
-
-    csv(string path, bool hasHeader) {
-
-        // Create file reader
-        ifstream infile;
-        infile.open (path);
-
-        // Create file header
-        if (hasHeader) {
-
-        }
-
-    }
-
-};

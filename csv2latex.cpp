@@ -29,16 +29,23 @@ public:
         string line;
         while (getline(infile, line)) {
             cout << line << endl;
+            split(line);
         }
-
         infile.close();
 
     }
 
 private: 
 
-    string* split(string line) {
-        return NULL;
+    void split(string line) {
+        int index = line.find(",");
+        while (index != -1) {
+            string value = line.substr(0, index);
+            cout << value << endl;
+            line.erase(0, index+1);
+            index = line.find(",");
+        }
+        cout << line << endl;
     }
 
 };

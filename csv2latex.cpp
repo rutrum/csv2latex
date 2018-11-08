@@ -2,16 +2,15 @@
 #include <fstream>
 #include <string>
 #include <stdio.h>
+#include <vector>
 
 using namespace std;
 
 class csv {
 
-    string* header;
-
     // numRows does not include header row
     int numCols, numRows;
-    string** data;
+    vector< vector<string> > data;
 
 public:
 
@@ -26,26 +25,38 @@ public:
             return;
         }
 
-        string line;
-        while (getline(infile, line)) {
-            cout << line << endl;
-            split(line);
-        }
+        parse(infile);
+
         infile.close();
 
     }
 
 private: 
 
-    void split(string line) {
+    void parse(ifstream& infile) {
+        string line;
+        while (getline(infile, line)) {
+            data.push_back(split(line));
+        }
+    }
+
+    vector<string> split(string line) {
+        vector<string> cols;
+
         int index = line.find(",");
         while (index != -1) {
+
+            // Find value and reset index
             string value = line.substr(0, index);
-            cout << value << endl;
             line.erase(0, index+1);
             index = line.find(",");
+
+            // Store value in vector
+            cols.push_back(value);
         }
-        cout << line << endl;
+
+        cols.push_back(line);
+        return cols;
     }
 
 };

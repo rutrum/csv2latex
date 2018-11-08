@@ -99,7 +99,11 @@ private:
     }
 
     string constructHead() {
-        return "";
+        string header = "\\begin{tabular}{";
+        for (int i = 0; i < data[0].size(); i++) {
+            header.append("c");
+        }
+        return header + "}\n";
     }
 
     string constructData() {

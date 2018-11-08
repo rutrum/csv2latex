@@ -31,6 +31,15 @@ public:
 
     }
 
+    void print() {
+        for (int i = 0; i < data.size(); i++) {
+            for (int j = 0; j < data[i].size(); j++) {
+                cout << data[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+
 private: 
 
     void parse(ifstream& infile) {
@@ -76,5 +85,6 @@ int main(int argc, char** argv) {
     }
 
     csv CSV(infilePath);
+    CSV.print();
 
 }

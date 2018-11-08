@@ -84,8 +84,30 @@ public:
         ofstream outfile;
         outfile.open (path);
 
+        construct(outfile);
+
         outfile.close();
 
+    }
+
+private:
+
+    void construct(ofstream& outfile) {
+        outfile << constructHead()
+                << constructData()
+                << constructFoot();
+    }
+
+    string constructHead() {
+        return "";
+    }
+
+    string constructData() {
+        return "";
+    }
+
+    string constructFoot() {
+        return "";
     }
 
 };
@@ -106,5 +128,7 @@ int main(int argc, char** argv) {
 
     csv CSV(infilePath);
     CSV.print();
+
+    latex LATEX(outfilePath, CSV.getData());
 
 }

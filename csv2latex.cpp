@@ -107,11 +107,19 @@ private:
     }
 
     string constructData() {
-        return "";
+        string body = "";
+        for (int i = 0; i < data.size(); i++) {
+            body += "\t";
+            for (int j = 0; j < data[i].size() - 1; j++) {
+                body += data[i][j] + " & ";
+            }
+            body += data[i][data[i].size() - 1] + " \\\\\n";
+        }
+        return body;
     }
 
     string constructFoot() {
-        return "";
+        return "\\end{tabular}\n";
     }
 
 };
@@ -131,7 +139,6 @@ int main(int argc, char** argv) {
     }
 
     csv CSV(infilePath);
-    CSV.print();
 
     latex LATEX(outfilePath, CSV.getData());
 

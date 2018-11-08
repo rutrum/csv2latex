@@ -8,8 +8,6 @@ using namespace std;
 
 class csv {
 
-    // numRows does not include header row
-    int numCols, numRows;
     vector< vector<string> > data;
 
 public:
@@ -40,6 +38,10 @@ public:
         }
     }
 
+    vector< vector<string> > getData() {
+        return data;
+    }
+
 private: 
 
     void parse(ifstream& infile) {
@@ -66,6 +68,24 @@ private:
 
         cols.push_back(line);
         return cols;
+    }
+
+};
+
+class latex {
+
+    vector< vector<string> > data;
+
+public:
+
+    latex(string path, vector< vector<string> > data) {
+        this->data = data;
+
+        ofstream outfile;
+        outfile.open (path);
+
+        outfile.close();
+
     }
 
 };

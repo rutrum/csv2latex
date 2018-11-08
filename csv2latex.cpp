@@ -108,13 +108,21 @@ private:
 
     string constructData() {
         string body = "";
-        for (int i = 0; i < data.size(); i++) {
+        for (int i = 0; i < data.size() - 1; i++) {
             body += "\t";
             for (int j = 0; j < data[i].size() - 1; j++) {
                 body += data[i][j] + " & ";
             }
-            body += data[i][data[i].size() - 1] + " \\\\\n";
+            body += data[i][data[i].size() - 1] + " \\\\ \\hline\n";
         }
+
+        //construct last line
+        body += "\t";
+        for (int j = 0; j < data[data.size() - 1].size() - 1; j++) {
+            body += data[data.size() - 1][j] + " & ";
+        }
+        body += data[data.size() - 1][data[data.size() - 1].size() - 1] + "\n";
+
         return body;
     }
 

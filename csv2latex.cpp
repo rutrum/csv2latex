@@ -59,7 +59,8 @@ int main(int argc, char** argv) {
         infilePath = argv[1];
         outfilePath = argv[2];
     } else {
-        cout << "Please enter filename after executable." << endl;
+        cout << "Please enter input file and output " << endl 
+             << "name after executable." << endl;
         return 0;
     }
 

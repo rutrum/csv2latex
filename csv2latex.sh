@@ -10,7 +10,17 @@ INPUT=$1
 OUTPUT=$2
 
 # Print starting enviornment
-echo '\begin{tabular}' > $OUTPUT;
+echo -n '\begin{tabular}{' > $OUTPUT;
+
+# Determine width by examining first line
+FIRST=$( head -n 1 $INPUT | sed s/,/" "/g )
+for i in $FIRST
+do
+    echo -n "l" >> $OUTPUT
+done
+
+# Finish starting enviornment
+echo "}" >> $OUTPUT
 
 cat $INPUT | while read LINE; do
 

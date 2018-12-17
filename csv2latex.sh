@@ -22,7 +22,12 @@ done
 # Finish starting enviornment
 echo "}" >> $OUTPUT
 
+# We add another counter for special formatting on last line
+NUMLINES=$(wc -l < $INPUT)
+CURRENTLINE=0
+
 cat $INPUT | while read LINE; do
+    let CURRENTLINE++
 
     # First we change commas to spaces
     # and treat LIST as an array
@@ -37,14 +42,17 @@ cat $INPUT | while read LINE; do
     unset LIST[0]
 
     # Print remaining elements
-    for i in "${LIST[@]}"
-    do
+    for i in "${LIST[@]}"; do
         echo -n " & " >> $OUTPUT
         echo -n $i >> $OUTPUT
     done
     
     # Print end line
-    echo ' \\ \hline' >> $OUTPUT
+    if [ $CURRENTLINE -lt $NUMLINES ]; then
+        echo ' \\ \hline' >> $OUTPUT
+    else
+        echo "" >> $OUTPUT
+    fi
 
 done
 

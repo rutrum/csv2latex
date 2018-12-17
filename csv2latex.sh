@@ -71,7 +71,11 @@ cat $INPUT | while read LINE; do
     done
     
     # Print end line
-    if [ $CURRENTLINE -lt $NUMLINES ]; then
+    if [[ $CURRENTLINE -eq 1 && $HEADERLINE ]]; then
+        # Add header line
+        echo ' \\ \hline \hline' >> $OUTPUT
+    elif [ $CURRENTLINE -lt $NUMLINES ]; then
+        # Omit line break on final line
         echo ' \\ \hline' >> $OUTPUT
     else
         echo "" >> $OUTPUT

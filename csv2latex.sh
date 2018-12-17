@@ -1,13 +1,36 @@
 #!/bin/bash
 
-# EXPECTED PARAMETERS
-#   $1: input file
-#   $2: output file
+HEADERLINE=''
+INPUT=''
+OUTPUT=''
 
-# For now, we expect no headers
+function printHelp {
+    echo "Usage: csv2latex [OPTIONS] -i <input file> -o <output file>"
+    echo "Converts a csv file into a latex table."
+    echo "Flags:"
+    echo "  -h  Include a header line"
+    echo ""
+}
 
-INPUT=$1
-OUTPUT=$2
+# Read flags
+while getopts 'hi:o:' flag; do
+    case "${flag}" in
+        h)  HEADERLINE='true' ;;
+        i)  INPUT="${OPTARG}" ;;
+        o)  OUTPUT="${OPTARG}" ;;
+        *)  printHelp
+            exit 1 ;;
+    esac
+done
+
+# check if input and outfile files were given
+if [ -z $INPUT ]; then
+    echo "No input file given. Use -i <input file>."
+    exit 1
+elif [ -z $OUTPUT ]; then
+    echo "No output file given. Use -o <output file>."
+    exit 1
+fi
 
 # Print starting enviornment
 echo -n '\begin{tabular}{' > $OUTPUT;
